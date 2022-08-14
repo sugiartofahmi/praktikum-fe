@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div
+      id="app"
+      class="h-screen w-full flex flex-row-reverse gap-x-10 justify-center pt-8 bg-[#2A0944]"
+    >
+      <div class="w-full max-w-xs">
+        <form
+          @submit.prevent="athlete.isUpdate ? updateAthlete() : submitAthlete()"
+          class="bg-white shadow-xl border-3 border-gray-200 px-8 pt-6 pb-8 mb-4 rounded"
+        >
+          <div class="mb-4">
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              for="fullname"
+            >
+              Nama
+            </label>
+            <input
+              v-model="athlete.name"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="text"
+              placeholder="Masukan Nama Lengkap "
+            />
+          </div>
+          <div class="mb-4">
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              for="fullname"
+            >
+              Umur
+            </label>
+            <input
+              v-model="athlete.age"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="number"
+              placeholder="Masukan Umur "
+            />
+          </div>
+          <div class="mb-6">
+            <label
+              class="block text-gray-700 text-sm font-bold mb-2"
+              for="kelas"
+            >
+              Geup
+            </label>
+            <input
+              v-model="athlete.geup"
+              class="shadow appearance-none rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              type="text"
+              placeholder="Masukan Geup "
+            />
+          </div>
+          <div class="flex items-center justify-between">
+            <button
+              :disabled="!isValid"
+              class="disabled:hidden bg-blue-500 disabled:bg-gray-300 disabled:text-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+            >
+              {{athlete.isUpdate ? 'Ubah' : 'Simpan'}}
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="overflow-x-auto rounded-lg">
+        <table class="w-full">
+          <thead class="bg-[#3FA796] text-black font-bold sticky top-0">
+            <tr class="text-center">
+              <th class="py-3 px-6">Nama</th>
+              <th class="py-3 px-6">Umur</th>
+              <th class="py-3 px-6">Tingkatan Geup</th>
+              <th class="py-3 px-6">Aksi</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white">
+            <tr v-for="(item, index) in athlete.list" :key="index">
+              <div>
+                <td class="py-3 px-6">{{item.name}}</td>
+                <td class="py-3 px-6">{{item.age}} Tahun</td>
+                <td class="py-3 px-6">{{item.geup}}</td>
+                <td class="py-3 px-6">
+                  <span
+                    @click="deleteAthlete(item.id)"
+                    class="cursor-pointer px-4 py-1 text-sm text-red-400 bg-red-200 rounded-full"
+                    >Hapus</span
+                  >
+                  <span
+                    @click="getAthleteById(item.id)"
+                    class="cursor-pointer ml-2 px-4 py-1 text-sm text-blue-600 bg-blue-200 rounded-full"
+                    >Ubah</span
+                  >
+                </td>
+              </div>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>
