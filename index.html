@@ -10,6 +10,18 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
+    <header
+      class="px-5 w-full h-[50px] flex items-center bg-[#3FA796] justify-between"
+    >
+      <figure><img width="40" src="./img/logo.png" alt="" /></figure>
+      <nav>
+        <ul class="flex gap-x-5">
+          <span class="cursor-pointer">Beranda</span>
+          <span class="cursor-pointer">Data</span>
+          <span class="cursor-pointer">Informasi</span>
+        </ul>
+      </nav>
+    </header>
     <div
       id="app"
       class="h-screen w-full flex flex-row-reverse gap-x-10 justify-center pt-8 bg-[#2A0944]"
@@ -79,13 +91,13 @@
             <tr class="text-center">
               <th class="py-3 px-6">Nama</th>
               <th class="py-3 px-6">Umur</th>
-              <th class="py-3 px-6">Tingkatan Geup</th>
+              <th class="py-3 px-6">Tingkatan</th>
               <th class="py-3 px-6">Aksi</th>
             </tr>
           </thead>
           <tbody class="bg-white">
             <tr v-for="(item, index) in athlete.list" :key="index">
-              <div>
+              <div class="uppercase">
                 <td class="py-3 px-6">{{item.name}}</td>
                 <td class="py-3 px-6">{{item.age}} Tahun</td>
                 <td class="py-3 px-6">{{item.geup}}</td>
