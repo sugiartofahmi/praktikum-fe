@@ -29,6 +29,7 @@ const app = createApp({
       } catch (err) {
         athlete.value.isUpdate = false;
         athlete.value.errorMessage = err.message;
+        console.log(athlete.value.errorMessage);
       }
     };
 
@@ -41,15 +42,15 @@ const app = createApp({
         athlete.value.name = resAthlete.data.name;
         athlete.value.age = resAthlete.data.age;
         athlete.value.geup = resAthlete.data.geup;
-        console.log(athlete.value.isUpdate);
-        console.log(athlete.value.id);
         return resAthlete.data;
       } catch (err) {
         athlete.value.isUpdate = false;
+        athlete.value.id = "";
         athlete.value.name = "";
         athlete.value.age = "";
         athlete.value.geup = "";
         athlete.value.errorMessage = err.message;
+        console.log(athlete.value.errorMessage);
       }
     };
     const deleteAthlete = async (id) => {
@@ -67,6 +68,7 @@ const app = createApp({
       } catch (err) {
         athlete.value.isUpdate = false;
         athlete.value.errorMessage = err.message;
+        console.log(athlete.value.errorMessage);
       }
     };
     const submitAthlete = async () => {
@@ -78,13 +80,18 @@ const app = createApp({
         });
         if (!resAthlete) throw new Error("Failed to add data");
         athlete.value.isUpdate = false;
+        athlete.value.errorMessage = "";
         athlete.value.name = "";
         athlete.value.age = "";
         athlete.value.geup = "";
         await getAthlete();
       } catch (err) {
+        athlete.value.name = "";
+        athlete.value.age = "";
+        athlete.value.geup = "";
         athlete.value.isUpdate = false;
         athlete.value.errorMessage = err.message;
+        console.log(athlete.value.errorMessage);
       }
     };
     const updateAthlete = async () => {
@@ -105,6 +112,7 @@ const app = createApp({
       } catch (err) {
         athlete.value.isUpdate = false;
         athlete.value.errorMessage = err.message;
+        console.log(athlete.value.errorMessage);
       }
     };
 
@@ -113,12 +121,12 @@ const app = createApp({
     });
     return {
       athlete,
+      isValid,
       getAthlete,
       getAthleteById,
       deleteAthlete,
       submitAthlete,
       updateAthlete,
-      isValid,
     };
   },
 });
